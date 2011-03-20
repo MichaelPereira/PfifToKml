@@ -1,83 +1,90 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Mar 12, 2011 12:16:12 AM by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 19, 2011 11:42:55 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="missingpeoplejapan" name="fr.michaelpereira.pfiftokml.Person" table="person">
-    <id name="personRecordId" type="string">
-      <column length="200" name="person_record_id"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="entryDate" type="timestamp">
-      <column length="19" name="entry_date"/>
-    </property>
-    <property name="authorName" type="string">
-      <column length="256" name="author_name"/>
-    </property>
-    <property name="authorEmail" type="string">
-      <column length="256" name="author_email"/>
-    </property>
-    <property name="authorPhone" type="string">
-      <column length="256" name="author_phone"/>
-    </property>
-    <property name="sourceName" type="string">
-      <column length="256" name="source_name"/>
-    </property>
-    <property name="sourceDate" type="timestamp">
-      <column length="19" name="source_date"/>
-    </property>
-    <property name="sourceUrl" type="string">
-      <column length="256" name="source_url"/>
-    </property>
-    <property name="firstName" type="string">
-      <column length="256" name="first_name"/>
-    </property>
-    <property name="lastName" type="string">
-      <column length="256" name="last_name"/>
-    </property>
-    <property name="homeCity" type="string">
-      <column length="256" name="home_city"/>
-    </property>
-    <property name="homeState" type="string">
-      <column length="256" name="home_state"/>
-    </property>
-    <property name="homeNeighborhood" type="string">
-      <column length="256" name="home_neighborhood"/>
-    </property>
-    <property name="homeStreet" type="string">
-      <column length="256" name="home_street"/>
-    </property>
-    <property name="homeZip" type="string">
-      <column length="256" name="home_zip"/>
-    </property>
-    <property name="photoUrl" type="string">
-      <column length="65535" name="photo_url"/>
-    </property>
-    <property name="other" type="string">
-      <column length="65535" name="other"/>
-    </property>
-    <property name="sex" type="string">
-      <column length="6" name="sex"/>
-    </property>
-    <property name="dateOfBirth" type="date">
-      <column length="10" name="date_of_birth"/>
-    </property>
-    <property name="age" type="java.lang.Short">
-      <column name="age"/>
-    </property>
-    <property name="homeCountry" type="string">
-      <column length="256" name="home_country"/>
-    </property>
-    <set inverse="true" name="notesForLinkedPersonRecordId">
-      <key>
-        <column length="200" name="linked_person_record_id"/>
-      </key>
-      <one-to-many class="fr.michaelpereira.pfiftokml.Note"/>
-    </set>
-    <set inverse="true" name="notesForPersonRecordId">
-      <key>
-        <column length="200" name="person_record_id" not-null="true"/>
-      </key>
-      <one-to-many class="fr.michaelpereira.pfiftokml.Note"/>
-    </set>
-  </class>
+    <class name="fr.michaelpereira.pfiftokml.Person" table="person" catalog="missingpeoplejapan">
+        <id name="personRecordId" type="string">
+            <column name="person_record_id" length="200" />
+            <generator class="assigned" />
+        </id>
+        <property name="entryDate" type="timestamp">
+            <column name="entry_date" length="19" />
+        </property>
+        <property name="authorName" type="string">
+            <column name="author_name" length="256" />
+        </property>
+        <property name="authorEmail" type="string">
+            <column name="author_email" length="256" />
+        </property>
+        <property name="authorPhone" type="string">
+            <column name="author_phone" length="256" />
+        </property>
+        <property name="sourceName" type="string">
+            <column name="source_name" length="256" />
+        </property>
+        <property name="sourceDate" type="timestamp">
+            <column name="source_date" length="19" />
+        </property>
+        <property name="sourceUrl" type="string">
+            <column name="source_url" length="256" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="first_name" length="256" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="256" />
+        </property>
+        <property name="homeCity" type="string">
+            <column name="home_city" length="256" />
+        </property>
+        <property name="homeState" type="string">
+            <column name="home_state" length="256" />
+        </property>
+        <property name="homeNeighborhood" type="string">
+            <column name="home_neighborhood" length="256" />
+        </property>
+        <property name="homeStreet" type="string">
+            <column name="home_street" length="256" />
+        </property>
+        <property name="homeZip" type="string">
+            <column name="home_zip" length="256" />
+        </property>
+        <property name="photoUrl" type="string">
+            <column name="photo_url" length="65535" />
+        </property>
+        <property name="other" type="string">
+            <column name="other" length="65535" />
+        </property>
+        <property name="sex" type="string">
+            <column name="sex" length="6" />
+        </property>
+        <property name="dateOfBirth" type="date">
+            <column name="date_of_birth" length="10" />
+        </property>
+        <property name="age" type="java.lang.Short">
+            <column name="age" />
+        </property>
+        <property name="homeCountry" type="string">
+            <column name="home_country" length="256" />
+        </property>
+        <property name="latitude" type="big_decimal">
+            <column name="latitude" precision="18" scale="12" />
+        </property>
+        <property name="longitude" type="big_decimal">
+            <column name="longitude" precision="18" scale="12" />
+        </property>
+        <set name="notesForLinkedPersonRecordId" inverse="true">
+            <key>
+                <column name="linked_person_record_id" length="200" />
+            </key>
+            <one-to-many class="fr.michaelpereira.pfiftokml.Note" />
+        </set>
+        <set name="notesForPersonRecordId" inverse="true">
+            <key>
+                <column name="person_record_id" length="200" not-null="true" />
+            </key>
+            <one-to-many class="fr.michaelpereira.pfiftokml.Note" />
+        </set>
+    </class>
 </hibernate-mapping>

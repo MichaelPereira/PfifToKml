@@ -1,5 +1,5 @@
 package fr.michaelpereira.pfiftokml;
-// Generated Mar 12, 2011 12:16:10 AM by Hibernate Tools 3.2.1.GA
+// Generated Mar 19, 2011 11:42:53 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;

@@ -1,7 +1,8 @@
 package fr.michaelpereira.pfiftokml;
-// Generated Mar 12, 2011 12:16:10 AM by Hibernate Tools 3.2.1.GA
+// Generated Mar 19, 2011 11:42:53 PM by Hibernate Tools 3.2.1.GA
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,8 +47,10 @@ public class Person  implements java.io.Serializable {
      private Date dateOfBirth;
      private Short age;
      private String homeCountry;
-     private Set<Note> notesForLinkedPersonRecordId = new HashSet<Note>(0);
-     private Set<Note> notesForPersonRecordId = new HashSet<Note>(0);
+     private BigDecimal latitude;
+     private BigDecimal longitude;
+     private Set notesForLinkedPersonRecordId = new HashSet(0);
+     private Set notesForPersonRecordId = new HashSet(0);
 
     public Person() {
     }
@@ -56,7 +59,7 @@ public class Person  implements java.io.Serializable {
     public Person(String personRecordId) {
         this.personRecordId = personRecordId;
     }
-    public Person(String personRecordId, Date entryDate, String authorName, String authorEmail, String authorPhone, String sourceName, Date sourceDate, String sourceUrl, String firstName, String lastName, String homeCity, String homeState, String homeNeighborhood, String homeStreet, String homeZip, String photoUrl, String other, String sex, Date dateOfBirth, Short age, String homeCountry, Set<Note> notesForLinkedPersonRecordId, Set<Note> notesForPersonRecordId) {
+    public Person(String personRecordId, Date entryDate, String authorName, String authorEmail, String authorPhone, String sourceName, Date sourceDate, String sourceUrl, String firstName, String lastName, String homeCity, String homeState, String homeNeighborhood, String homeStreet, String homeZip, String photoUrl, String other, String sex, Date dateOfBirth, Short age, String homeCountry, BigDecimal latitude, BigDecimal longitude, Set notesForLinkedPersonRecordId, Set notesForPersonRecordId) {
        this.personRecordId = personRecordId;
        this.entryDate = entryDate;
        this.authorName = authorName;
@@ -78,6 +81,8 @@ public class Person  implements java.io.Serializable {
        this.dateOfBirth = dateOfBirth;
        this.age = age;
        this.homeCountry = homeCountry;
+       this.latitude = latitude;
+       this.longitude = longitude;
        this.notesForLinkedPersonRecordId = notesForLinkedPersonRecordId;
        this.notesForPersonRecordId = notesForPersonRecordId;
     }
@@ -272,20 +277,38 @@ public class Person  implements java.io.Serializable {
     public void setHomeCountry(String homeCountry) {
         this.homeCountry = homeCountry;
     }
+    
+    @Column(name="latitude", precision=18, scale=12)
+    public BigDecimal getLatitude() {
+        return this.latitude;
+    }
+    
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+    
+    @Column(name="longitude", precision=18, scale=12)
+    public BigDecimal getLongitude() {
+        return this.longitude;
+    }
+    
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="personByLinkedPersonRecordId")
-    public Set<Note> getNotesForLinkedPersonRecordId() {
+    public Set getNotesForLinkedPersonRecordId() {
         return this.notesForLinkedPersonRecordId;
     }
     
-    public void setNotesForLinkedPersonRecordId(Set<Note> notesForLinkedPersonRecordId) {
+    public void setNotesForLinkedPersonRecordId(Set notesForLinkedPersonRecordId) {
         this.notesForLinkedPersonRecordId = notesForLinkedPersonRecordId;
     }
 @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="personByPersonRecordId")
-    public Set<Note> getNotesForPersonRecordId() {
+    public Set getNotesForPersonRecordId() {
         return this.notesForPersonRecordId;
     }
     
-    public void setNotesForPersonRecordId(Set<Note> notesForPersonRecordId) {
+    public void setNotesForPersonRecordId(Set notesForPersonRecordId) {
         this.notesForPersonRecordId = notesForPersonRecordId;
     }
 

@@ -6,9 +6,14 @@ package fr.michaelpereira.pfiftokml.parsers;
 
 import fr.michaelpereira.pfiftokml.HibernateUtil;
 import fr.michaelpereira.pfiftokml.Person;
+import geo.google.GeoAddressStandardizer;
+import geo.google.GeoException;
+import geo.google.datamodel.GeoAddress;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.classic.Session;
@@ -23,12 +28,13 @@ import org.xml.sax.helpers.DefaultHandler;
 public class PersonParser extends DefaultHandler
 {
 
-  int i = 0;
-  String tmpstring;
-  boolean personExist;
+  private int i = 0;
+  private String tmpstring;
+  private boolean personExist = false;
   private Person person;
   private Session session;
   private DateFormat df;
+  private GeoAddressStandardizer st;
 
   @Override
   public void characters(char[] ch, int start, int length) throws SAXException
@@ -50,6 +56,8 @@ public class PersonParser extends DefaultHandler
       return;
     }
     if (qName.equals("pfif:person")) {
+      GetCoordinates();
+
       System.out.println("saving person " + ++i);
 
       session.save(person);
@@ -58,7 +66,7 @@ public class PersonParser extends DefaultHandler
 
       person = null;
     } else if (qName.equals("pfif:person_record_id")) {
-      Person exist = (Person) session.get(Person.class, person.getPersonRecordId());
+      Person exist = (Person) session.get(Person.class, tmpstring);
       if (exist == null) {
         person.setPersonRecordId(tmpstring);
       } else {
@@ -123,11 +131,45 @@ public class PersonParser extends DefaultHandler
     tmpstring = null;
   }
 
+  private void GetCoordinates()
+  {
+    try {
+      if ((person.getHomeCountry() == null) || (person.getHomeCountry().isEmpty())) {
+        person.setHomeCountry("Japan");
+      }
+      if ((person.getHomeStreet() == null)
+              && (person.getHomeCity() == null)) {
+        return;
+      }
+      StringBuilder completeAddress = new StringBuilder();
+      completeAddress.append(person.getHomeStreet());
+      completeAddress.append(" ");
+      completeAddress.append(person.getHomeCity());
+      completeAddress.append(" ");
+      completeAddress.append(person.getHomeZip());
+      completeAddress.append(" ");
+      completeAddress.append(person.getHomeState());
+      completeAddress.append(" ");
+      completeAddress.append(person.getHomeCountry());
+      List<GeoAddress> addr = st.standardizeToGeoAddresses(completeAddress.toString());
+      if (addr.size() > 1) {
+        person.setLatitude(BigDecimal.valueOf(addr.get(0).getCoordinate().getLatitude()));
+        person.setLongitude(BigDecimal.valueOf(addr.get(0).getCoordinate().getLongitude()));
+      }
+    } catch (GeoException ex) {
+      Logger.getLogger(PersonParser.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+  }
+
   @Override
   public void startDocument() throws SAXException
   {
     session = HibernateUtil.getSessionFactory().openSession();
     df = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    st = new GeoAddressStandardizer("ABQIAAAA6B29h_jw9FScosFGF0ij5BQ4udjPp1RpRcRdf4AWfcSWL4EZshR9teHS341V0RD2xlaY0WgTrumk0g");
+
+
   }
 
   @Override
@@ -137,6 +179,7 @@ public class PersonParser extends DefaultHandler
       personExist = false;
       person = new Person();
       session.beginTransaction();
+
     }
   }
 }
