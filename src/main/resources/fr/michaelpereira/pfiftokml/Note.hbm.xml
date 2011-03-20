@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 12, 2011 12:16:12 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="missingpeoplejapan" name="fr.michaelpereira.pfiftokml.Note" table="note">
+    <id name="noteRecordId" type="string">
+      <column length="200" name="note_record_id"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="fr.michaelpereira.pfiftokml.Person" fetch="select" name="personByPersonRecordId">
+      <column length="200" name="person_record_id" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="fr.michaelpereira.pfiftokml.Person" fetch="select" name="personByLinkedPersonRecordId">
+      <column length="200" name="linked_person_record_id"/>
+    </many-to-one>
+    <property name="entryDate" type="timestamp">
+      <column length="19" name="entry_date"/>
+    </property>
+    <property name="authorName" type="string">
+      <column length="256" name="author_name"/>
+    </property>
+    <property name="authorEmail" type="string">
+      <column length="256" name="author_email"/>
+    </property>
+    <property name="authorPhone" type="string">
+      <column length="256" name="author_phone"/>
+    </property>
+    <property name="sourceDate" type="timestamp">
+      <column length="19" name="source_date"/>
+    </property>
+    <property name="found" type="java.lang.Boolean">
+      <column name="found"/>
+    </property>
+    <property name="emailOfFoundPerson" type="string">
+      <column length="256" name="email_of_found_person"/>
+    </property>
+    <property name="phoneOfFoundPerson" type="string">
+      <column length="256" name="phone_of_found_person"/>
+    </property>
+    <property name="lastKnownLocation" type="string">
+      <column length="256" name="last_known_location"/>
+    </property>
+    <property name="text" type="string">
+      <column length="65535" name="text"/>
+    </property>
+    <property name="status" type="string">
+      <column length="19" name="status"/>
+    </property>
+  </class>
+</hibernate-mapping>
