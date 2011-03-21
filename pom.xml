@@ -31,19 +31,6 @@
       </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <url>http://download.java.net/maven/2/</url>
-      <id>hibernate-support</id>
-      <layout>default</layout>
-      <name>Repository for library Library[hibernate-support]</name>
-    </repository>
-    <repository>
-      <id>unknown-jars-temp-repo</id>
-      <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
-      <url>file:${project.basedir}/lib</url>
-    </repository>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -75,11 +62,6 @@
       <groupId>org.hibernate</groupId>
       <artifactId>ejb3-persistence</artifactId>
       <version>1.0.1.GA</version>
-    </dependency>
-    <dependency>
-      <groupId>unknown.binary</groupId>
-      <artifactId>mysql-connector-java-5.1.6-bin</artifactId>
-      <version>SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>geoGoogle</groupId>
@@ -120,6 +102,11 @@
       <groupId>javax.xml</groupId>
       <artifactId>jaxb-api</artifactId>
       <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.15</version>
     </dependency>
   </dependencies>
 </project>
