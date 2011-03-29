@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://jnickers12.mgnt.stevens-tech.edu:8889/missingpeoplejapan?useUnicode=true&amp;characterEncoding=UTF-8</property>
     <property name="hibernate.connection.username">lsa</property>
-    <property name="hibernate.connection.password">stigmergy</property>
+    <property name="hibernate.connection.password"></property>
     <mapping resource="fr/michaelpereira/pfiftokml/Note.hbm.xml"/>
     <mapping resource="fr/michaelpereira/pfiftokml/Person.hbm.xml"/>
   </session-factory>
